@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import IconSymbol from '../iconSymbol';
 import {useNavigation} from '@react-navigation/native';
 

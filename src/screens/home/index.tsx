@@ -1,13 +1,13 @@
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, Text, View, StyleSheet} from 'react-native';
 import React, {useEffect, useContext} from 'react';
-import MarketItem from '@components/marketItem';
+import {MarketItem, OrderBook} from '@components';
 import {GobalStyles} from '../../assets/styles/globalStyles';
 import PricesContext from '../../context/pricesContext';
 import BalanceContext from '../../context/balanceContext';
 
 const HomeScreen = () => {
   const {handleRefresh, priceBtc, priceEth, priceUsdc} = useContext(PricesContext);
-  const {balance} = useContext(BalanceContext);
+  const {balance, orderBook} = useContext(BalanceContext);
   const data = [
     {
       symbol: 'BTC',
@@ -48,8 +48,14 @@ const HomeScreen = () => {
           />
         ))}
       </View>
+
+      <OrderBook orderBook={orderBook}/>
+
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
+
+
+
