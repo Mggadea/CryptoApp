@@ -14,7 +14,6 @@ export function PricesContextProvider({children}) {
     const PrecioBTC = async () => {
       try {
         const res = await getPriceBTC();
-        console.log('res', res.data);
         setPriceBtc(res.data.price);
       } catch (error) {
         console.log(error);
@@ -23,7 +22,6 @@ export function PricesContextProvider({children}) {
     const precioETH = async () => {
       try {
         const res = await getPriceETH();
-        console.log('res', res.data);
         setPriceEth(res.data.price);
       } catch (error) {
         console.log(error);
@@ -32,7 +30,6 @@ export function PricesContextProvider({children}) {
     const precioUSDC = async () => {
       try {
         const res = await getPriceUSDC();
-        console.log('res', res.data);
         setPriceUsdc(res.data.price);
       } catch (error) {
         console.log(error);
