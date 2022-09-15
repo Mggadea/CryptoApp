@@ -5,7 +5,7 @@ import BalanceContext from '../../context/balanceContext';
 import {GobalStyles} from '../../assets/styles/globalStyles';
 
 const Wallet = () => {
-  const {balanceBTC,balanceETH,balanceUSDC} = useContext(BalanceContext);
+  const {balanceBTC, balanceETH, balanceUSDC} = useContext(BalanceContext);
 
   const data = [
     {
@@ -26,10 +26,11 @@ const Wallet = () => {
   ];
   return (
     <SafeAreaView>
-           <View style={{paddingHorizontal: 20}}>
+      <View style={{paddingHorizontal: 20}}>
         <Text style={GobalStyles.title}>Wallet</Text>
         {data.map((item, index) => (
           <MarketItem
+            wallet
             key={index}
             symbol={item.symbol}
             name={item.name}
