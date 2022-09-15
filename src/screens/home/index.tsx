@@ -48,14 +48,9 @@ const HomeScreen = () => {
           />
         ))}
       </View>
-
       <OrderBook orderBook={orderBook}/>
-
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
-
-
-
