@@ -15,12 +15,13 @@ interface Props {
   symbol: string;
   name: string;
   price: number;
+  wallet: boolean;
 }
 
-const MarketItem = ({symbol, price, name}: Props) => {
+const MarketItem = ({symbol, price, name, wallet}: Props) => {
   const navigation = useNavigation();
   const handleNavigate = () => {
-    navigation.navigate('Trade',{
+    navigation.navigate('Trade', {
       token: symbol,
     });
   };
@@ -34,7 +35,9 @@ const MarketItem = ({symbol, price, name}: Props) => {
         </View>
       </View>
       {price != null ? (
-        <Text style={styles.price}>$ {price} </Text>
+        <Text style={styles.price}>
+          $ {Number(price).toFixed(wallet ? 8 : 2)}{' '}
+        </Text>
       ) : (
         <ActivityIndicator />
       )}
