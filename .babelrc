@@ -9,12 +9,11 @@
         "alias": {
           "@navigation": "./src/navigation",
           "@screens": "./src/screens",
-          "@styles": "./src/styles",
+          "@styles": "./src/assets/styles",
+          "@assets": "./src/assets",
           "@services": "./src/services",
           "@components": "./src/components",
           "@context": "./src/context",
-
-
         }
       }
     ]

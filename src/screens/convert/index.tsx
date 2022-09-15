@@ -8,21 +8,21 @@ import {
 } from 'react-native';
 import React, {useState, useContext, useEffect} from 'react';
 import {Button, MarketOrLimit, TokenPrice} from '@components';
+import {BalanceContext, PricesContext} from '@context';
+import {GobalStyles} from '@styles';
+
+
 import {useRoute} from '@react-navigation/native';
-import BalanceContext from '@context/balanceContext';
-import PricesContext from '@context/pricesContext';
-import {GobalStyles} from '../../assets/styles/globalStyles';
 
 const Convert: FC = () => {
   const {
+    handleBuy,
+    handleSell,
     balance,
-    setBalance,
     balanceBTC,
     balanceETH,
     balanceUSDC,
-    setBalanceBTC,
-    setBalanceETH,
-    setBalanceUSDC,
+
   } = useContext(BalanceContext);
   const {handleRefresh, priceBtc, priceEth, priceUsdc} =
     useContext(PricesContext);
@@ -31,46 +31,16 @@ const Convert: FC = () => {
 
   const {operationType, token} = params;
 
+  const [amount, onChangeamount] = useState(0);
+  const [tokenPrice, setTokenPrice] = useState(0);
+  const [available, setAvailable] = useState(0);
+
   const handleOnPress = () => {
     if (operationType === 'Buy') {
-      const balanceLeft = balance - amount;
-      if (balanceLeft > 0 && balance > 0 && amount !== 0) {
-        setBalance(balanceLeft);
-        switch (token) {
-          case 'BTC':
-            setBalanceBTC(amount / tokenPrice);
-            break;
-          case 'ETH':
-            setBalanceETH(amount / tokenPrice);
-            break;
-          case 'USDC':
-            setBalanceUSDC(amount / tokenPrice);
-            break;
-        }
-        Alert.alert('Successful operation');
-      } else {
-        Alert.alert('Insufficient balance');
-      }
+      handleBuy(tokenPrice, amount, true, token);
     }
     if (operationType === 'Sell') {
-      const balanceLeft = available - amount;
-      if (balanceLeft > 0 && balance > 0 && amount !== 0) {
-        setBalance(balance + amount * tokenPrice);
-        switch (token) {
-          case 'BTC':
-            setBalanceBTC(balanceBTC - amount);
-            break;
-          case 'ETH':
-            setBalanceETH(balanceETH - amount);
-            break;
-          case 'USDC':
-            setBalanceUSDC(balanceUSDC - amount);
-            break;
-        }
-        Alert.alert('Successful operation');
-      } else {
-        Alert.alert('Insufficient balance');
-      }
+      handleSell(tokenPrice, amount, true, token);
     }
   };
 
@@ -100,10 +70,6 @@ const Convert: FC = () => {
     priceUsdc,
     token,
   ]);
-
-  const [amount, onChangeamount] = useState(0);
-  const [tokenPrice, setTokenPrice] = useState(0);
-  const [available, setAvailable] = useState(0);
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>

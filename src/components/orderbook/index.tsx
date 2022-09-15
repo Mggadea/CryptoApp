@@ -1,22 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {GobalStyles} from '../assets/styles/globalStyles';
-
+import {GobalStyles} from '@styles';
 
 const OrderBook = ({orderBook}) => {
-  const Item = () => (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-      }}>
-      <Text>{item.id}</Text>
 
-      <Text>
-        {item.amount} {item.token}
-      </Text>
-    </View>
-  );
   return (
     <View style={styles().container}>
       <Text style={GobalStyles.title}>Order book</Text>
@@ -30,8 +17,8 @@ const OrderBook = ({orderBook}) => {
             </Text>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-              <Text>Amunt</Text>
-              <Text>Price</Text>
+              <Text>Amount</Text>
+              <Text>Total in usd</Text>
             </View>
             {orderBook
               ?.filter(val => {
@@ -40,16 +27,12 @@ const OrderBook = ({orderBook}) => {
                 }
               })
               .map((item, index) => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                  }}>
-                  <Text>
-                    {item.amount} {item.token}
-                  </Text>
-                  <Text>{item.price}</Text>
-                </View>
+                <View key={index} style={styles().itemContainer}>
+                <Text style={styles(item.operation).price}>{item.price}</Text>
+                <Text>
+                  {item.amount} {item.token}
+                </Text>
+              </View>
               ))}
           </View>
           <View style={styles().buttonContainer}>
@@ -63,8 +46,8 @@ const OrderBook = ({orderBook}) => {
                 flexDirection: 'row-reverse',
                 justifyContent: 'space-around',
               }}>
-              <Text>Amunt</Text>
-              <Text>Price</Text>
+              <Text>Amount</Text>
+              <Text>Total in usd</Text>
             </View>
             {orderBook
               ?.filter(val => {
@@ -75,7 +58,6 @@ const OrderBook = ({orderBook}) => {
               .map((item, index) => (
                 <View key={index} style={styles().itemContainer}>
                   <Text style={styles(item.operation).price}>{item.price}</Text>
-
                   <Text>
                     {item.amount} {item.token}
                   </Text>

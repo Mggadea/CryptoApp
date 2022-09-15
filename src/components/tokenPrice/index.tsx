@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import IconSymbol from '../iconSymbol'
 import React from 'react'
-import {GobalStyles} from '../../assets/styles/globalStyles';
+import {GobalStyles} from '@styles';
+
 
 
 const TokenPrice = ({token, price}) => {

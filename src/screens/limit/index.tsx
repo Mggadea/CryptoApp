@@ -17,6 +17,8 @@ const Limit = () => {
 
   const {
     balance,
+    handleBuy,
+    handleSell,
     setBalance,
     balanceBTC,
     balanceETH,
@@ -45,30 +47,20 @@ const Limit = () => {
         case 'USDC':
           setAvailable(balanceUSDC);
           break;
+          
       }
     }
 
     setRecive(valueToRecieve);
-  }, [price, amount]);
+  }, [price, amount, balance, balanceBTC, balanceETH, balanceUSDC]);
 
   const handlePress = () => {
-    if (amount > available) {
-      Alert.alert('The amount is greater than your balance');
-    }
     if (operationType === 'Buy') {
-      setBalance(balance - recive);
-      switch (token) {
-        case 'BTC':
-          setBalanceBTC(balanceBTC + amount);
-          break;
-        case 'ETH':
-          setBalanceETH(balanceETH + amount);
-          break;
-        case 'USDC':
-          setBalanceUSDC(balanceUSDC + amount);
-          break;
-      }
-      Alert.alert('Successfull operation');
+      handleBuy(price, amount, false, token);
+    }
+
+    if (operationType === 'Sell') {
+      handleSell(price, amount, false, token);
     }
   };
 
@@ -106,7 +98,7 @@ const Limit = () => {
       <Text style={styles.text}>
         You will{' '}
         {operationType === 'Sell'
-          ? 'recieve' + ' ' + recive + token
+          ? 'recieve' + ' ' + recive + ' ' + 'USD'
           : 'spend' + ' ' + recive + ' ' + 'USD'}
       </Text>
       <Button onPress={handlePress} text={operationType} />

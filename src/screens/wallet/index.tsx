@@ -1,8 +1,8 @@
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
 import MarketItem from '@components/marketItem';
-import BalanceContext from '../../context/balanceContext';
-import {GobalStyles} from '../../assets/styles/globalStyles';
+import {GobalStyles} from '@styles';
+import { BalanceContext} from '@context';
 
 const Wallet = () => {
   const {balanceBTC, balanceETH, balanceUSDC} = useContext(BalanceContext);

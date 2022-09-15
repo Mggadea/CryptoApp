@@ -1,17 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect, useContext} from 'react';
-import {GobalStyles} from '../../assets/styles/globalStyles';
+import {GobalStyles} from '@styles';
 import {Button, TokenPrice} from '@components';
+import {PricesContext} from '@context';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import PricesContext from '../../context/pricesContext';
-import {BalanceContext} from '../../context';
 
 const Trade = () => {
   const {handleRefresh, priceBtc, priceEth, priceUsdc} =
     useContext(PricesContext);
 
-  const {orderBook} = useContext(BalanceContext);
 
   const navigation = useNavigation();
   const {params} = useRoute();
@@ -57,7 +55,6 @@ const Trade = () => {
   useEffect(() => {
     setSelectedToken(token);
     prices();
-    console.log('trade', orderBook);
   }, []);
 
   const handleBuy = () => {
