@@ -1,10 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect, useContext} from 'react';
 import {GobalStyles} from '../../assets/styles/globalStyles';
-import Button from '../../components/button/button';
+import {Button, TokenPrice} from '@components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import PricesContext from '../../context/pricesContext';
-import IconSymbol from '../../components/iconSymbol';
+import useTokens from '../../hooks/useTokens';
 
 const Trade = () => {
   const {handleRefresh, priceBtc, priceEth, priceUsdc} =
@@ -12,12 +13,25 @@ const Trade = () => {
   const navigation = useNavigation();
   const {params} = useRoute();
 
-  const [selectedToken, setSelectedToken] = useState('BTC');
+  const [selectedToken, setSelectedToken] = useState('');
   const [price, setPrice] = useState(0);
 
   const {token} = params;
 
+  const wea = useTokens(token);
+
   const prices = () => {
+    switch (selectedToken) {
+      case 'BTC':
+        setPrice(priceBtc);
+        break;
+        case 'ETH':
+        setPrice(priceEth);
+        break;
+        case 'USDC':
+        setPrice(priceUsdc);
+        break;
+    }
     if (selectedToken === 'BTC') {
       setPrice(priceBtc);
     }
@@ -32,6 +46,7 @@ const Trade = () => {
   useEffect(() => {
     setSelectedToken(token);
     prices();
+    console.log('sda', wea);
   }, []);
 
   const handleBuy = () => {
@@ -48,14 +63,7 @@ const Trade = () => {
   };
   return (
     <View style={GobalStyles.container}>
-      <View style={styles.buttonsContainer}>
-      <View style={{flexDirection:'row'}}>
-          <IconSymbol symbol={token} />
-          <Text style={[GobalStyles.title, {marginLeft:10}]}>{selectedToken}</Text>
-        </View>
-        <Text style={GobalStyles.title}>$ {Number(price).toFixed(2)}</Text>
-      </View>
-
+      <TokenPrice token={selectedToken} price={price} />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <Button text={'Sell'} color="#F03A47" onPress={handleSell} />
@@ -64,8 +72,56 @@ const Trade = () => {
           <Button text={'Buy'} color="#00CC66" onPress={handleBuy} />
         </View>
       </View>
-
       <Text style={GobalStyles.title}>OrderBook</Text>
+
+      <View
+        style={{
+          borderRadius: 10,
+          backgroundColor: '#fff',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
+          paddingVertical: 20,
+          marginBottom: 10,
+        }}>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={[styles.buttonContainer, {borderRightWidth: 1}]}>
+            <Text
+              style={{fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
+              Sell orders
+            </Text>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+              <Text>Amunt</Text>
+              <Text>Price</Text>
+            </View>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+              <Text>0.12312312</Text>
+              <Text>20000</Text>
+            </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Text
+              style={{fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
+              Buy orders
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row-reverse',
+                justifyContent: 'space-around',
+              }}>
+              <Text>Amunt</Text>
+              <Text>Price</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -76,7 +132,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     marginVertical: 20,
   },
   buttonContainer: {
