@@ -35,7 +35,7 @@ const HomeScreen = () => {
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{color: '#6a6a6a', fontSize: 18}}>Account balance</Text>
 
-        <Text style={[GobalStyles.title, {fontSize: 32}]}>${balance}</Text>
+        <Text style={[GobalStyles.title, {fontSize: 32}]}>${balance.toLocaleString('es','EU')}</Text>
       </View>
       <View style={{paddingHorizontal: 20}}>
         <Text style={GobalStyles.title}>Market</Text>
