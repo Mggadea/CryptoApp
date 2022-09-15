@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const GobalStyles = StyleSheet.create({
   container: {
@@ -11,5 +11,16 @@ export const GobalStyles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+
+  input: {
+    borderBottomColor: '#06f',
+    borderBottomWidth: 2,
+    width: '100%',
+    height: 50,
+  },
+
+  inputLabel: {
+    fontSize: 18,
   },
 });
