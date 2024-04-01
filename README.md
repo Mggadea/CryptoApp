@@ -22,6 +22,6 @@ Start the Development Server: Run npm start.
 Run Your App:
 
 iOS: Open the project in Xcode and run.
+
 Android: Open an Android emulator or connect a physical device and run npx react-native run-android.
-That's it! Your React Native app should now be running.
 
