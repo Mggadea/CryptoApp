@@ -1,6 +1,6 @@
 # CryptoApp
 
-A demo app for buy and share cryptocurrencies. This was made for a technical interview so it has room to grow.
+A demo app for buy and sell cryptocurrencies. This was made for a technical interview so it has room to grow.
 
 ## Table of Contents
 
